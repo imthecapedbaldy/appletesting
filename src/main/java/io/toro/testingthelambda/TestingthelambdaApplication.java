@@ -19,15 +19,13 @@ public class TestingthelambdaApplication {
                 new Apple(155, "red"),
 				new Apple(120, "yellow"));
 		List<Apple> heavyApples =
-				filterApples(inventory, new AppleHeavyWeightPredicate());
+				filterApples(inventory, (Apple apple) -> apple.getWeight()>150);
 		List<Apple> greenApples =
-				filterApples(inventory, new AppleGreenColorPredicate());
-        List<Apple> redApples = filterApples(inventory, new ApplePredicate() {
-            public boolean test(Apple apple){
-                return "red".equals(apple.getColor());
-            }
-            });
-        List<Apple> yellowApples = filterApples( inventory, (Apple apple) -> "yellow".equals( apple.getColor() ) );
+				filterApples(inventory, (Apple apple) -> "green".equals( apple.getColor() ) );
+        List<Apple> redApples =
+                filterApples(inventory, (Apple apple) -> "red".equals( apple.getColor() ) );
+        List<Apple> yellowApples =
+                filterApples( inventory, (Apple apple) -> "yellow".equals( apple.getColor() ) );
         prettyPrintApple(greenApples, new AppleFancyFormatter());
         prettyPrintApple(redApples, new AppleFancyFormatter());
         prettyPrintApple(yellowApples, new AppleFancyFormatter());
