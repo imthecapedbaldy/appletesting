@@ -3,6 +3,7 @@ package io.toro.testingthelambda;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,7 +31,25 @@ public class TestingthelambdaApplication {
         prettyPrintApple(redApples, new AppleFancyFormatter());
         prettyPrintApple(yellowApples, new AppleFancyFormatter());
 
+        List<Apple> what = filter( redApples, (Apple apple) -> apple.getColor().length() == 0);
+        List<Apple> wat = filter( redApples, (Apple apple) -> apple.getColor().length() == 3);
+
+        System.out.println(what.size());
+        System.out.println(wat.size());
+
 	}
+    public static <T> List<T> filter(List<T> list, Predicate<T> compareToThis   ){
+	    List<T> result = new ArrayList<>();
+        for(T item: list){
+            if(compareToThis.test(item)){
+                result.add(item);
+            }
+        }
+        return result;
+	}
+
+	public static
+
     private static List<Apple> filterApples( List<Apple> inventory,
             ApplePredicate p ) {
         List<Apple> result = new ArrayList<>();
